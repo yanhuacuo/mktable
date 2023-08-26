@@ -11,6 +11,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QStandardPaths>
+#include <QDesktopServices>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,8 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("码表修正工具");
     mkHash(); //生成码元映射表
 
-    connect(this,SIGNAL(start_thread_Dict(const QString &,const QHash<QString,QString> &,const QString &)),readDictTable,SLOT(Thread_deal(const QString &,const QHash<QString,QString> &,const QString &)),Qt::UniqueConnection);
-    connect(this,SIGNAL(start_thread_Spelling(const QString &,const QHash<QString,QString> &,const QString &)),readSpelling,SLOT(Thread_deal(const QString &,const QHash<QString,QString> &,const QString &)),Qt::UniqueConnection);
+    connect(this,SIGNAL(start_thread_Dict(QString,QHash<QString,QString>,QString)),readDictTable,SLOT(Thread_deal(QString,QHash<QString,QString>,QString)),Qt::UniqueConnection);
+    connect(this,SIGNAL(start_thread_Spelling(QString,QHash<QString,QString>,QString)),readSpelling,SLOT(Thread_deal(QString,QHash<QString,QString>,QString)),Qt::UniqueConnection);
 
     connect(readSpelling,&ReadSpellingTable::sign_Stop,this,&MainWindow::onSign_Stop_Spelling);
     connect(readSpelling,&ReadSpellingTable::mkIndex,this,&MainWindow::getIndex);
@@ -323,9 +324,16 @@ void MainWindow::setSkin()
 
 
 void MainWindow::openDir(){
-    QProcess process;
-    QString location = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-    QString toDir = location +"/新生成码表目录/";
-    QString cmd = QString("explorer.exe /select,\"%1\"").arg(toDir);
-    process.startDetached(cmd);
+
+//    QProcess process;
+//    QString location = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+//    QString toDir = location +"/新生成码表目录/";
+//    QString cmd = QString("explorer.exe /select,\"%1\"").arg(toDir);
+//    process.startDetached(cmd);
+
+      QString location = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+      QString toDir = location +"/新生成码表目录/";
+      qDebug()<< toDir << '\n';
+      QDesktopServices::openUrl(QUrl::fromLocalFile(toDir));
+
 }
