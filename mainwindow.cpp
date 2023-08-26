@@ -160,7 +160,7 @@ void MainWindow::on_btnOpenDict_clicked()
     readDictTable->moveToThread(thread_Dict);
 
     if(thread_Dict->isRunning()){
-        return;
+        thread_Dict->quit();
     }
     thread_Dict->start();
     emit start_thread_Dict(dictTable,indexHash,curPath);
@@ -180,7 +180,7 @@ void MainWindow::on_btnOpenSpellingTable_clicked()
 
 
     if(thread_Spelling->isRunning()){
-        return;
+        thread_Spelling->quit();
     }
     thread_Spelling->start();
     emit start_thread_Spelling(spellingTable,charHash,curPath);
@@ -218,7 +218,6 @@ void MainWindow::onSign_Stop_Dict(){
     QMessageBox::information(this, "码表处理完毕", "【新生成码表目录】在桌面上！",
                                      QMessageBox::Ok,QMessageBox::NoButton);
     openDir();
-    readDictTable->disconnect();
 }
 
 
