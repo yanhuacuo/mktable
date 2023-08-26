@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/table">
+        <file>charData.txt</file>
+		<file>98WB-1.otf</file>
+		<file>wubi98-dz.txt</file>
+		<file>Wubi98_Single_Code.txt</file>
+		<file>icon.png</file>
+		<file>icon.ico</file>
+    </qresource>
+</RCC>
