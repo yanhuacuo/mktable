@@ -34,7 +34,7 @@ void readDict::Thread_deal(const QString & dictTable_T,const QHash<QString,QStri
 
     QString newDictText = toDir + "/新生成_单字词库.txt";
     QFile my_file1cc(newDictText);
-    my_file1cc.setPermissions(QFile::ReadOther | QFile::WriteOther);
+    my_file1cc.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
 
 
     if(my_file1cc.exists()){

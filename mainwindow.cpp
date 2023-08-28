@@ -80,9 +80,9 @@ bool MainWindow::MakeHashTable(){
         QFile my_file2s(charData_Path + "/Wubi98_Single_Code.txt");
         QFile my_file3s(charData_Path + "/wubi98-dz.txt");
 
-        my_file1s.setPermissions(QFile::ReadOther | QFile::WriteOther);
-        my_file2s.setPermissions(QFile::ReadOther | QFile::WriteOther);
-        my_file3s.setPermissions(QFile::ReadOther | QFile::WriteOther);
+        my_file1s.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+        my_file2s.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+        my_file3s.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
 
         if(ok1 && ok2 && ok3){
             QMessageBox::information(this, "缺少码元单义表", "已经从程序中拿出备份补上！",
